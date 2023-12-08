@@ -7,7 +7,7 @@
     "build:clean": "rm -rf dist",
     "dev": "ts-node src/index.ts",
     "start": "ts-node src/index.ts",
-    "postinstall": "cd ../../../ && npx husky install ./server-code/services/template/.husky",
+    "postinstall": "cd ../ && npx husky install ./server-code/services/template/.husky",
     "test:unit": "jest"
   },
   "devDependencies": {
