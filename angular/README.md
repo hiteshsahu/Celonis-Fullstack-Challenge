@@ -8,7 +8,7 @@ This project uses:
 - [CORS Extension](https://chromewebstore.google.com/detail/allow-cors-origin/igomecoafaibkpelmljakiklmgdajojk) to make the client talk to our server.
 
 ### ▶️ Build & run the Server
-Run `ng serve` for a start dev server on [http://localhost:4200/](http://localhost:4200/). 
+Run `ng serve` to start a dev server on [**http://localhost:4200/**](http://localhost:4200/). 
 
 The application will automatically reload if you change any of the source files.
 
@@ -17,7 +17,7 @@ Run `ng generate component component-name` to generate a new component.
 
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-### Further help
+###  Help
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 -----
