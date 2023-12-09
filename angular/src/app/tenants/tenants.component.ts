@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTenantComponent} from "../add-tenant/add-tenant.component";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-tenants',
@@ -13,7 +14,7 @@ export class TenantsComponent {
   private http = inject(HttpClient)
 
   constructor(http: HttpClient, public dialog: MatDialog) {
-    http.get("http://localhost:3000/show-tenants").subscribe((tenants) => {
+    http.get(`${environment.apiURL}/show-tenants`).subscribe((tenants) => {
       this.tenants = tenants;
     })
   }
@@ -25,7 +26,7 @@ export class TenantsComponent {
 
   deleteTenant(tenant: any) {
     this.tenants.splice(this.tenants.indexOf(tenant), 1);
-    this.http.post("http://localhost:3000/delete-tenant?name=" + tenant.name, {}).subscribe((res) => {
+    this.http.post(`${environment.apiURL}/delete-tenant?name=` + tenant.name, {}).subscribe((res) => {
       console.log(res);
     })
   }

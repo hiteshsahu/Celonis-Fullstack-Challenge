@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-make-user-dialog',
@@ -16,7 +17,7 @@ export class MakeUserDialogComponent {
 
   createUser() {
     this.createButton._elementRef.nativeElement.disabled = true;
-    this.http.get("http://localhost:3000/make-user/" + this.email + "?name=" + this.name).subscribe((users) => {
+    this.http.get(`${environment.apiURL}/make-user/` + this.email + "?name=" + this.name).subscribe((users) => {
       this.userCreated = true;
     })
   }

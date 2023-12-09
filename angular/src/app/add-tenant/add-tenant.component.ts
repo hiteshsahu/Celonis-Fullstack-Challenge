@@ -1,5 +1,6 @@
-import {Component, inject, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Component, inject, ViewChild } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-add-tenant',
@@ -14,7 +15,7 @@ export class AddTenantComponent {
 
   createTenant() {
     this.createButton._elementRef.nativeElement.disabled = true;
-    this.http.get("http://localhost:3000/make-tenant/" + this.name).subscribe((users) => {
+    this.http.get(`${environment.apiURL}/make-tenant/` + this.name).subscribe((users) => {
       this.tenantCreated = true;
     })
   }

@@ -1,4 +1,4 @@
-# Angular
+# User Service Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
@@ -26,6 +26,21 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Run `ng build` to build the project.
 
 The build artifacts will be stored in the `dist/` directory.
+
+Building frontend docker image
+> `docker build -t angular-front-end .`
+
+Check the generated frontend docker image
+> `docker images`
+
+ Run frontend docker container
+>  `docker run -d -p 4200:4200 angular-front-end`
+
+Check running frontend docker container
+> `docker ps` 
+
+Kill running frontend docker container
+> `docker kill <CONTAINER ID>` 
 
 ----
 
