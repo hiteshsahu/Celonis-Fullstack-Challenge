@@ -15,7 +15,7 @@ app.get('/', (req: any, res: any) => {
 
 app.get('/make-user/:email', (req: any, res: any) => {
     const user = { email: req.params.email, name: req.query.name };
-    console.log(user);
+    console.log("add user", user);
 
     dbclient.user.create({ data: user }).then(() => res.json({ status: "success" }))
 });
@@ -53,7 +53,7 @@ app.post('/delete-user', (req: any, res: any) => {
 
 app.get('/make-tenant/:name', (req: any, res: any) => {
     const tenant = { name: req.params.name };
-    console.log(tenant);
+    console.log("add tenant", tenant);
 
     dbclient.tenant.create({ data: tenant }).
         then(() => res.json({ status: "success" }))

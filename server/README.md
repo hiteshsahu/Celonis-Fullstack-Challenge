@@ -21,7 +21,7 @@ Install dependencies and push and seed the database schema:
 
 Start the server on [http://localhost:3000/](http://localhost:3000/)
 
-> ``yarn start``
+> `yarn start`
 
 ### ⚓ Git Hooks
 Git Hooks are configured using [Husky](https://github.com/typicode/husky) automatically in `yarn install`:
@@ -44,18 +44,18 @@ Build a stand-alone node app
 > `yarn build`
 
 Building server image
->`` docker build -t user-service-server .`` 
+> `docker build -t user-service-server .`
 
 Check the generated server image
-> `docker images `
+> `docker images`
 
- Run server image
-> `docker run -d -p 2222:8080 user-service-server`  
+ Run server container
+> `docker run -d -p 3000:3000 user-service-server`  
 
-Check running server docker image
+Check running server docker container
 > `docker ps` 
 
-Kill running server docker image
+Kill running server docker container
 > `docker kill <CONTAINER ID>` 
 ---
 

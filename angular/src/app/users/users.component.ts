@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} f
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {MakeUserDialogComponent} from "../make-user-dialog/make-user-dialog.component";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -18,10 +19,10 @@ export class UsersComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.http.get("http://localhost:3000/list-users").subscribe((users) => {
+    this.http.get(`${environment.apiURL}/list-users`).subscribe((users) => {
       this.users = users;
       this.users.forEach((user: any) => {
-        this.http.get("http://localhost:3000/send-user-tenant/" + user.email).subscribe((tenant) => {
+        this.http.get(`${environment.apiURL}/send-user-tenant/` + user.email).subscribe((tenant) => {
           user.tenant = tenant;
           this.cd.detectChanges();
         })
@@ -34,7 +35,7 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user: any) {
-    this.http.post("http://localhost:3000/delete-user?email=" + user.email, null).subscribe(() => {
+    this.http.post(`${environment.apiURL}/delete-user?email=` + user.email, null).subscribe(() => {
       const users = this.users;
       users.splice(users.indexOf(user), 1);
       this.users = users;
