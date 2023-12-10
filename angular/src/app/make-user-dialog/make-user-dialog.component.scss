@@ -1,13 +1,16 @@
 .save-button {
-    background-color: green;
-  }
-  
-.close-button {
-    background-color: orange;
-  }
+  background-color: green;
+}
 
-  .form-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
+.close-button {
+  background-color: orange;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.gutton-bottom {
+  margin-bottom: 15px;
+}

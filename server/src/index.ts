@@ -64,10 +64,12 @@ app.get('/show-tenants', (req: any, res: any) => {
 });
 
 app.post('/delete-tenant', (req: any, res: any) => {
-    dbclient.tenant.deleteMany({ where: { name: req.query.name } }).
+    const tenantName = req.query.name;
+    console.log("delete tenant", tenantName);
+
+    dbclient.tenant.deleteMany({ where: { name: tenantName } }).
         then(() => res.json({ status: "success" }))
 });
-
 
 // ------------User to Tenant Endpoints-------------
 
@@ -82,7 +84,8 @@ app.get('/send-user-tenant/:email', (req: any, res: any) => {
 });
 
 app.put('/put-user-to-tenant/:email/:name', async (req: any, res: any) => {
-    const tenant = await dbclient.tenant.findFirst({ where: { name: req.params.name } });
+    const tenant = await dbclient.tenant.findFirst({
+         where: { name: req.params.name } });
     dbclient.user.update({
         where: { email: req.params.email },
         // @ts-ignore

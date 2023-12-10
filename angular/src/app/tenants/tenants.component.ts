@@ -24,10 +24,10 @@ export class TenantsComponent {
   }
 
   loadTanent() {
-    this.showProgressbar= true
+    this.showProgressbar = true
     this.http.get(`${environment.apiURL}/show-tenants`).subscribe((tenants) => {
       this.tenants = tenants;
-      this.showProgressbar= false
+      this.showProgressbar = false
       this.cd.detectChanges();
     })
   }
@@ -40,12 +40,11 @@ export class TenantsComponent {
   }
 
   deleteTenant(tenant: any) {
-    this.showProgressbar= true
-    //  this.tenants.splice(this.tenants.indexOf(tenant), 1);
+    this.showProgressbar = true
     this.http.post(`${environment.apiURL}/delete-tenant?name=` + tenant.name, null).subscribe((res) => {
-      this.showSnackBar("Deleted Tenant " + tenant.name)
-      this.showProgressbar= false
-      this.loadTanent()
+      this.showProgressbar = false
+      this.tenants.splice(this.tenants.indexOf(tenant), 1);
+      this.cd.detectChanges();
     })
   }
 

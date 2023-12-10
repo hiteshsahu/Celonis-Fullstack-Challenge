@@ -2,15 +2,16 @@
 <div mat-dialog-content class="form-container">
   <p>Add a new user</p>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" color="accent" class="gutton-bottom">
     <mat-label>Enter your name</mat-label>
-    <input matInput [(ngModel)]="name">
+    <input matInput placeholder="Enter your name" [formControl]="name" required>
+    <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" color="accent" class="gutton-bottom">
     <input matInput placeholder="Enter your email" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
     <mat-label>Enter your email</mat-label>
     <mat-icon matSuffix>mail</mat-icon>
   </mat-form-field>
@@ -18,8 +19,10 @@
   <p *ngIf="userCreated">
     User Added successfully 🎉!
   </p>
-
 </div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressbar" color ="accent"></mat-progress-bar>
+
 <div mat-dialog-actions>
   <button mat-button (click)="createUser()" class="save-button" #createButton>
     <mat-icon>save</mat-icon> Save User
