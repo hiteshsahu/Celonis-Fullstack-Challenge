@@ -1,7 +1,9 @@
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="showProgressbar"></mat-progress-bar>
+
 <div class="grid-container">
   <mat-grid-list cols="5" rowHeight="420px" class="container" [gutterSize]="'10px'">
     <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let user of users">
-     
+
       <mat-card class="user-card">
 
         <mat-card-header>
@@ -18,10 +20,10 @@
           <mat-chip color="accent">{{user.tenant.name}}</mat-chip>
         </mat-card-content>
 
-        <mat-card-actions >
-          <button mat-button class="close-button" (click)="deleteUser(user)"> 
+        <mat-card-actions>
+          <button mat-button class="close-button" (click)="deleteUser(user)">
             <mat-icon>delete</mat-icon>DELETE</button>
-          <button mat-button class ="edit-button"  routerLink="/user/{{user.id}}"><mat-icon>edit</mat-icon>EDIT</button>
+          <button mat-button class="edit-button" routerLink="/user/{{user.id}}"><mat-icon>edit</mat-icon>EDIT</button>
         </mat-card-actions>
 
       </mat-card>
@@ -29,4 +31,5 @@
   </mat-grid-list>
 </div>
 
-<button mat-fab (click)="makeUser()" id="creat-user-button"><mat-icon>add</mat-icon></button>
+<button mat-fab (click)="makeUser()" id="creat-user-button" #tooltip="matTooltip"
+  matTooltip="Create a new user"><mat-icon>add</mat-icon></button>
