@@ -1,5 +1,23 @@
-#creat-user-button{
+#creat-user-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+.no-spacing {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.container {
+  margin: 10px;
+}
+
+.tenant-list-item {
+  height: 70px !important;
+  margin-top: 15px
+}
+
+.action-delete {
+  color: #e57373
 }
