@@ -1,5 +1,37 @@
-#creat-user-button{
+#creat-user-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+.container {
+  margin: 10px;
+}
+
+.user-card {
+  max-height: 430px;
+}
+
+.user-card-image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.user-header-image {
+  background-image: url('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-size: cover;
+}
+
+.content {
+  padding: 16px;
+}
+
+.edit-button {
+  margin-left: 10px;
+  background-color: green;
+}
+
+.close-button {
+  background-color: orange;
 }

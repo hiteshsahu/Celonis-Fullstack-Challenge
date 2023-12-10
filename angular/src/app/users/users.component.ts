@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {MatDialog} from "@angular/material/dialog";
-import {MakeUserDialogComponent} from "../make-user-dialog/make-user-dialog.component";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { MatDialog } from "@angular/material/dialog";
+import { MakeUserDialogComponent } from "../make-user-dialog/make-user-dialog.component";
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -19,6 +19,10 @@ export class UsersComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.loadUsers()
+  }
+
+  loadUsers() {
     this.http.get(`${environment.apiURL}/list-users`).subscribe((users) => {
       this.users = users;
       this.users.forEach((user: any) => {
@@ -32,6 +36,9 @@ export class UsersComponent implements OnInit {
 
   makeUser() {
     this.dialog.open(MakeUserDialogComponent)
+    this.dialog.afterAllClosed.subscribe(result => {
+      this.loadUsers()
+    });
   }
 
   deleteUser(user: any) {
@@ -39,6 +46,7 @@ export class UsersComponent implements OnInit {
       const users = this.users;
       users.splice(users.indexOf(user), 1);
       this.users = users;
+      this.cd.detectChanges();
     })
   }
 }
