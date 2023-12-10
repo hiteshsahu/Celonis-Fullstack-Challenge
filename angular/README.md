@@ -17,6 +17,8 @@ Run `ng generate component component-name` to generate a new component.
 
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+Icons: https://jossef.github.io/material-design-icons-iconfont/
+
 ###  Help
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 

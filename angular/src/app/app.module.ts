@@ -16,10 +16,13 @@ import { MakeUserDialogComponent } from './make-user-dialog/make-user-dialog.com
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatLineModule} from "@angular/material/core";
 import { TenantsComponent } from './tenants/tenants.component';
 import { AddTenantComponent } from './add-tenant/add-tenant.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,11 @@ import { AddTenantComponent } from './add-tenant/add-tenant.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatLineModule
+    ReactiveFormsModule,
+    MatLineModule,
+    MatCardModule,
+    MatGridListModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

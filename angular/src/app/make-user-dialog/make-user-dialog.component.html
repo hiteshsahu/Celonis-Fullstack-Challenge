@@ -1,19 +1,30 @@
-<h1 mat-dialog-title>Create user</h1>
-<div mat-dialog-content>
-  <p>Create a new user</p>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
+<h1 mat-dialog-title>Create User</h1>
+<div mat-dialog-content class="form-container">
+  <p>Add a new user</p>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your name</mat-label>
     <input matInput [(ngModel)]="name">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]="email">
+
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Enter your email" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-label>Enter your email</mat-label>
+    <mat-icon matSuffix>mail</mat-icon>
   </mat-form-field>
+
   <p *ngIf="userCreated">
-    User created successfully!
+    User Added successfully 🎉!
   </p>
+
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button (click)="createUser()" color="primary" #createButton>Save User</button>
-  <button mat-button mat-dialog-close>Close dialog</button>
+  <button mat-button (click)="createUser()" class="save-button" #createButton>
+    <mat-icon>save</mat-icon> Save User
+  </button>
+  <button mat-button mat-dialog-close class="close-button">
+    <mat-icon>close</mat-icon> Close dialog
+  </button>
 </div>
