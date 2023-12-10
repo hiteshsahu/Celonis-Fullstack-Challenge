@@ -1,7 +1,20 @@
-<mat-list>
-  <mat-list-item *ngFor="let tenant of tenants">
-    <mat-icon matListItemIcon (click)="deleteTenant(tenant)">delete</mat-icon>
-    {{tenant.name}}
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="showProgressbar"></mat-progress-bar>
+
+<mat-list class="container">
+  <h3 mat-subheader>Tenants</h3>
+  <mat-list-item matRipple *ngFor="let tenant of tenants" class="tenant-list-item">
+    <h2 mat-line class="no-spacing">{{tenant.name}}</h2>
+    <p mat-line class="no-spacing"><b>ID:</b> {{tenant.id}} </p>
+
+    <button matListItemMeta mat-icon-button (click)="deleteTenant(tenant)">
+      <mat-icon matListItemIcon class="mat-24, action-delete">
+        delete
+      </mat-icon>
+    </button>
+    <mat-divider [inset]="true"></mat-divider>
   </mat-list-item>
 </mat-list>
-<button mat-fab (click)="addTenant()" id="creat-user-button">+</button>
+
+
+<button mat-fab (click)="addTenant()" id="creat-user-button" #tooltip="matTooltip" matTooltip="Create a new tanant">
+  <mat-icon>add</mat-icon></button>

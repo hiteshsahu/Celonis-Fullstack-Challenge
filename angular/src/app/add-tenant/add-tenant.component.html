@@ -1,15 +1,26 @@
-<h1 mat-dialog-title>Create Tenant</h1>
+<h1 mat-dialog-title>Add Tenant</h1>
 <div mat-dialog-content>
   <p>Create a new tenant</p>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="name">
+
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Tenant Name</mat-label>
+    <input matInput placeholder="Enter Tenant name" [formControl]="name" required>
+    <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
   </mat-form-field>
+
   <p *ngIf="tenantCreated">
-    Tenant created successfully!
+    Tenant created successfull 🎉!
   </p>
+
 </div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressbar" color="accent"></mat-progress-bar>
+
 <div mat-dialog-actions>
-  <button mat-button (click)="createTenant()" class="save-button" #createButton>  <mat-icon>save</mat-icon> Save Tenant</button>
-  <button mat-button mat-dialog-close class="cancel-button"> <mat-icon>close</mat-icon> Close dialog</button>
+  <button mat-button (click)="createTenant()" class="save-button" #createButton>
+    <mat-icon>save</mat-icon> Save Tenant
+  </button>
+  <button mat-button mat-dialog-close class="cancel-button">
+    <mat-icon>close</mat-icon> Close dialog
+  </button>
 </div>
