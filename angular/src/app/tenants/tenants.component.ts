@@ -45,6 +45,7 @@ export class TenantsComponent {
       this.showProgressbar = false
       this.tenants.splice(this.tenants.indexOf(tenant), 1);
       this.cd.detectChanges();
+      this.showSnackBar("Deleted "+tenant.name)
     })
   }
 
