@@ -1,37 +1,45 @@
 <mat-progress-bar mode="indeterminate" color="accent" *ngIf="showProgressbar"></mat-progress-bar>
 
-<div class="grid-container">
-  <mat-grid-list cols="4" rowHeight="420px" class="container" [gutterSize]="'10px'">
-    <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let user of users">
+<div class="container">
+  <h1 class="page-heading"> Users</h1>
 
-      <mat-card class="user-card">
+  <div class="grid-container">
 
-        <mat-card-header>
-          <div mat-card-avatar class="user-header-image">
-          </div>
-          <mat-card-title>{{user.name}} </mat-card-title>
-          <mat-card-subtitle class="truncate">
-            <b>ID:</b> {{user.id}}
-          </mat-card-subtitle>
-        </mat-card-header>
+    <mat-grid-list cols="4" rowHeight="420px" class="container" [gutterSize]="'10px'">
+      <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let user of users">
 
-        <mat-card-content>
-          <img mat-card-md-image class="user-card-image"
-            src="https://source.unsplash.com/random/300x200?sig=${Math.random()}" alt="Photo of a Shiba Inu">
-          <h3 mat-line class="no-spacing">✉️ {{user.email}}</h3>
-          <p mat-line class="no-spacing">📆 {{user.createdAt | date}}</p>
-          <mat-chip *ngIf="user.tenant" color="accent">{{user.tenant.name}}</mat-chip>
-        </mat-card-content>
+        <mat-card class="user-card">
 
-        <mat-card-actions>
-          <button mat-button class="close-button" (click)="deleteUser(user)">
-            <mat-icon>delete</mat-icon>DELETE</button>
-          <button mat-button class="edit-button" routerLink="/user/{{user.id}}"><mat-icon>remove_red_eye</mat-icon>View</button>
-        </mat-card-actions>
+          <mat-card-header>
+            <div mat-card-avatar class="user-header-image">
+            </div>
+            <mat-card-title>{{user.name}} </mat-card-title>
+            <mat-card-subtitle class="truncate">
+              <b>ID:</b> {{user.id}}
+            </mat-card-subtitle>
+          </mat-card-header>
 
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+          <!-- "https://source.unsplash.com/random/300x200?sig=${Math.random()}" -->
+          <mat-card-content class="user-card-content">
+            <img mat-card-md-image class="user-card-image" src={{user.rentalImage}} alt="Photo of a Rental">
+            <h3 mat-line class="no-spacing">✉️ {{user.email}}</h3>
+            <p mat-line class="no-spacing">📆 {{user.createdAt | date}}</p>
+            <mat-chip style="background-color: #009688" selected="true" *ngIf="user.tenant">🏠
+              {{user.tenant.name}}</mat-chip>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button class="close-button" (click)="deleteUser(user)">
+              <mat-icon>delete</mat-icon>DELETE</button>
+            <button mat-button class="edit-button"
+              routerLink="/user/{{user.id}}"><mat-icon>remove_red_eye</mat-icon>View</button>
+          </mat-card-actions>
+
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
 </div>
 
 <button mat-fab (click)="makeUser()" id="creat-user-button" #tooltip="matTooltip"

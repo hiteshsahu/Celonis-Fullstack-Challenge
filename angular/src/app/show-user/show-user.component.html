@@ -1,5 +1,11 @@
+<h1 class="page-heading" *ngIf="!editMode; else editHeading">View User</h1>
+
+<ng-template #editHeading>
+  <h1 class="page-heading">Edit User</h1>
+</ng-template>
+
 <ng-container *ngIf="!editMode; else edit">
-  <h1>👤User: {{user?.name}}</h1>
+  <h1>🧑 User: {{user?.name}}</h1>
   <h2>✉️ Email: {{user?.email}}</h2>
   <h2>📆 Member since: {{user?.createdAt | date}}</h2>
   <p><b>🪪 ID:</b> {{user?.id}} </p>

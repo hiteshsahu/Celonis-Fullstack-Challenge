@@ -1,20 +1,22 @@
 <mat-progress-bar mode="indeterminate" color="accent" *ngIf="showProgressbar"></mat-progress-bar>
 
-<mat-list class="container">
-  <h3 mat-subheader>Tenants</h3>
-  <mat-list-item matRipple *ngFor="let tenant of tenants" class="tenant-list-item">
-    <h1 mat-line class="no-spacing" color="accent">{{tenant.name}}</h1>
-    <p mat-line class="no-spacing">📆 Member since: <b>{{tenant.createdAt | date}}</b> </p>
-    <p mat-line class="no-spacing"><b>🪪 ID:</b> {{tenant.id}} </p>
+<div class="container">
+  <h1 class="page-heading"> Tenants</h1>
+  <mat-list>
+    <mat-list-item matRipple *ngFor="let tenant of tenants" class="tenant-list-item">
+      <h1 mat-line class="no-spacing" color="accent">{{tenant.name}}</h1>
+      <p mat-line class="no-spacing">📆 Member since: <b>{{tenant.createdAt | date}}</b> </p>
+      <p mat-line class="no-spacing"><b>🪪 ID:</b> {{tenant.id}} </p>
 
-    <button matListItemMeta mat-icon-button (click)="deleteTenant(tenant)">
-      <mat-icon matListItemIcon class="mat-24, action-delete">
-        delete
-      </mat-icon>
-    </button>
-    <mat-divider [inset]="true"></mat-divider>
-  </mat-list-item>
-</mat-list>
+      <button matListItemMeta mat-icon-button (click)="deleteTenant(tenant)">
+        <mat-icon matListItemIcon class="mat-24, action-delete">
+          delete
+        </mat-icon>
+      </button>
+      <mat-divider [inset]="true"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>
 
 
 <button mat-fab (click)="addTenant()" id="creat-user-button" #tooltip="matTooltip" matTooltip="Create a new tanant">
