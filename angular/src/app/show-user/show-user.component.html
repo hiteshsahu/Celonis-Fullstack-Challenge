@@ -1,13 +1,24 @@
 <ng-container *ngIf="!editMode; else edit">
-  <h1>User: {{user?.name}}</h1>
-  <h2>Email: {{user?.email}}</h2>
+  <h1>👤User: {{user?.name}}</h1>
+  <h2>✉️ Email: {{user?.email}}</h2>
+  <h2>📆 Member since: {{user?.createdAt | date}}</h2>
+  <p><b>🪪 ID:</b> {{user?.id}} </p>
 </ng-container>
+
+<button mat-raised-button color="accent" *ngIf="!editMode; else saveButton" (click)="editUser()">
+  <mat-icon>edit</mat-icon>Edit user
+</button>
+
 <ng-template #edit>
-<mat-form-field>
-  <input matInput [(ngModel)]="name" placeholder="Name">
-</mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <input matInput [(ngModel)]="name" placeholder="Name">
+    <mat-label>User name</mat-label>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
 </ng-template>
-<button mat-raised-button color="accent" *ngIf="!editMode; else saveButton" (click)="editMode = true">Edit user</button>
+
 <ng-template #saveButton>
-  <button mat-raised-button color="primary" (click)="save()">Save</button>
+  <button mat-raised-button (click)="saveUser()" color="accent" class="save-button" #createButton>
+    <mat-icon>save</mat-icon> Save User
+  </button>
 </ng-template>

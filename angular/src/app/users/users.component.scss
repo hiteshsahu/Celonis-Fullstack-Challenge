@@ -9,7 +9,20 @@
 }
 
 .user-card {
-  max-height: 430px;
+  max-height: 490px;
+  overflow-y: auto;
+}
+
+.no-spacing {
+  margin: 1px !important;
+  padding-bottom: 3px !important;
+}
+
+.truncate {
+  white-space: nowrap;
+  width: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-card-image {
