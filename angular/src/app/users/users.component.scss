@@ -10,6 +10,8 @@
 
 .user-card {
   max-height: 490px;
+  width: 100%;
+  overflow-x: hidden ;
   overflow-y: auto;
 }
 
@@ -20,14 +22,18 @@
 
 .truncate {
   white-space: nowrap;
-  width: 100px; 
+  width: 170px; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.user-card-content{
+  width: 100%;
+}
+
 .user-card-image {
   height: 200px;
-  width: 100%;
+  width: 90%;
   object-fit: cover;
 }
 
@@ -46,5 +52,5 @@
 }
 
 .close-button {
-  background-color: orange;
+  background-color: #f44336 ;
 }

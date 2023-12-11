@@ -1,57 +1,60 @@
 import { PrismaClient } from "@prisma/client";
-import express from 'express';
+import express, { Request, Response } from 'express';
+import { User, Tenant } from "./types"
 
-const dbclient = new PrismaClient()
 const app = express();
+const dbclient = new PrismaClient()
 const port = process.env.SERVER_PORT || 3000;
 
-var bodyParser = require('body-parser')
 
-app.get('/', (req: any, res: any) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Successful response.');
 });
 
 // ------------User Endpoints-------------
 
-app.get('/make-user/:email', (req: any, res: any) => {
-    const user = { email: req.params.email, name: req.query.name };
+app.get('/make-user/:email', (req: Request, res: Response) => {
+    const user = {
+        email: req.params.email,
+        name: req.query.name as string
+    };
     console.log("add user", user);
 
     dbclient.user.create({ data: user }).then(() => res.json({ status: "success" }))
 });
 
-app.get('/list-users', (req: any, res: any) => {
-    dbclient.user.findMany().then((users) => res.json(users));
+app.get('/list-users', (req: Request, res: Response) => {
+    dbclient.user.findMany().then((users: User[]) => res.json(users));
 });
 
-app.get('/list-users/:name', (req: any, res: any) => {
+app.get('/list-users/:name', (req: Request, res: Response) => {
     dbclient.user.findMany({ where: { Tenant: { name: req.params.name } } }).
-        then((users) => res.json(users));
+        then((users: User[]) => res.json(users));
 });
 
-app.get('/show-user/:id', (req: any, res: any) => {
+app.get('/show-user/:id', (req: Request, res: Response) => {
     dbclient.user.findUnique({ where: { id: req.params.id } }).
-        then((user) => res.json(user));
+        then((user?: User | null) => res.json(user));
 });
 
-app.get('/send-user/:email', (req: any, res: any) => {
+app.get('/send-user/:email', (req: Request, res: Response) => {
     dbclient.user.findUnique({ where: { email: req.params.email } }).
-        then((user) => res.json(user));
+        then((user?: User | null) => res.json(user));
 });
 
-app.put('/update-user/:id', (req: any, res: any) => {
-    dbclient.user.update({ where: { id: req.params.id }, data: { name: req.query.name } }).
+app.put('/update-user/:id', (req: Request, res: Response) => {
+    dbclient.user.update({ where: { id: req.params.id }, data: { name: req.query.name as string } }).
         then(() => res.json({ status: "success" }))
 });
 
-app.post('/delete-user', (req: any, res: any) => {
-    dbclient.user.delete({ where: { email: req.query.email } }).
+app.post('/delete-user', (req: Request, res: Response) => {
+    dbclient.user.delete({ where: { email: req.query.email as string } }).
         then(() => res.json({ status: "success" }))
 });
 
 // ------------Tenant Endpoints-------------
 
-app.get('/make-tenant/:name', (req: any, res: any) => {
+app.get('/make-tenant/:name', (req: Request, res: Response) => {
     const tenant = { name: req.params.name };
     console.log("add tenant", tenant);
 
@@ -59,12 +62,12 @@ app.get('/make-tenant/:name', (req: any, res: any) => {
         then(() => res.json({ status: "success" }))
 });
 
-app.get('/show-tenants', (req: any, res: any) => {
-    dbclient.tenant.findMany().then((tenants) => res.json(tenants));
+app.get('/show-tenants', (req: Request, res: Response) => {
+    dbclient.tenant.findMany().then((tenants: Tenant[]) => res.json(tenants));
 });
 
-app.post('/delete-tenant', (req: any, res: any) => {
-    const tenantName = req.query.name;
+app.post('/delete-tenant', (req: Request, res: Response) => {
+    const tenantName = req.query.name as string;
     console.log("delete tenant", tenantName);
 
     dbclient.tenant.deleteMany({ where: { name: tenantName } }).
@@ -73,19 +76,20 @@ app.post('/delete-tenant', (req: any, res: any) => {
 
 // ------------User to Tenant Endpoints-------------
 
-app.get('/send-user-tenant/:email', (req: any, res: any) => {
+app.get('/send-user-tenant/:email', (req: Request, res: Response) => {
     dbclient.user.findUnique({ where: { email: req.params.email } }).
         then((user) => dbclient.tenant.findUnique({
             // @ts-ignore
             where: { id: user.tenantId }
         }).
-            then((tenant) => res.json(tenant)).
-            catch((err) => res.json({ status: "error", error: err })));
+            then((tenant: Tenant) => res.json(tenant)).
+            catch((err: Error) => res.json({ status: "error", error: err })));
 });
 
-app.put('/put-user-to-tenant/:email/:name', async (req: any, res: any) => {
+app.put('/put-user-to-tenant/:email/:name', async (req: Request, res: Response) => {
     const tenant = await dbclient.tenant.findFirst({
-         where: { name: req.params.name } });
+        where: { name: req.params.name }
+    });
     dbclient.user.update({
         where: { email: req.params.email },
         // @ts-ignore
