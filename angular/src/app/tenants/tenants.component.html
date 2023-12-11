@@ -3,8 +3,9 @@
 <mat-list class="container">
   <h3 mat-subheader>Tenants</h3>
   <mat-list-item matRipple *ngFor="let tenant of tenants" class="tenant-list-item">
-    <h2 mat-line class="no-spacing">{{tenant.name}}</h2>
-    <p mat-line class="no-spacing"><b>ID:</b> {{tenant.id}} </p>
+    <h1 mat-line class="no-spacing" color="accent">{{tenant.name}}</h1>
+    <p mat-line class="no-spacing">📆 Member since: <b>{{tenant.createdAt | date}}</b> </p>
+    <p mat-line class="no-spacing"><b>🪪 ID:</b> {{tenant.id}} </p>
 
     <button matListItemMeta mat-icon-button (click)="deleteTenant(tenant)">
       <mat-icon matListItemIcon class="mat-24, action-delete">
