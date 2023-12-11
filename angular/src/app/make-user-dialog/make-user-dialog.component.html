@@ -2,26 +2,38 @@
 <div mat-dialog-content class="form-container">
   <p>Add a new user</p>
 
-  <mat-form-field appearance="outline" color="accent" class="gutton-bottom">
+  <mat-form-field appearance="outline" color="accent" class="guttor-bottom">
     <mat-label>Enter your name</mat-label>
     <input matInput placeholder="Enter your name" [formControl]="name" required>
     <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" color="accent" class="gutton-bottom">
+  <mat-form-field appearance="outline" color="accent" class="guttor-bottom">
     <input matInput placeholder="Enter your email" [formControl]="email" required>
     <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
     <mat-label>Enter your email</mat-label>
     <mat-icon matSuffix>mail</mat-icon>
   </mat-form-field>
 
+  <mat-form-field appearance="outline" color="accent" class="guttor-bottom">
+    <p *ngIf="selectedTenant">Selected tanent: {{selectedTenant["name"]}}</p>
+    <mat-select placeholder="Select tenant" [(ngModel)]="selectedTenant" [required]="true">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let tenant of tenants" [value]="tenant">
+        {{tenant.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error>Please choose an tenant</mat-error>
+  </mat-form-field>
+
+
   <p *ngIf="userCreated">
     User Added successfully 🎉!
   </p>
 </div>
 
-<mat-progress-bar mode="indeterminate" *ngIf="showProgressbar" color ="accent"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressbar" color="accent"></mat-progress-bar>
 
 <div mat-dialog-actions>
   <button mat-button (click)="createUser()" class="save-button" #createButton>
